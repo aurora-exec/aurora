@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Roblox Executor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Matrix rain canvas -->
+    <canvas id="matrixCanvas"></canvas>
+    
+    <!-- Glitch overlay -->
+    <div class="glitch-overlay"></div>
+    
+    <!-- Main content -->
+    <main class="main">
+        <div class="container">
+            <!-- Glitchy header -->
+            <div class="header">
+                <div class="logo">
+                    <span class="logo-bracket">[</span>
+                    <span class="logo-text glitch" data-text="NEXUS">NEXUS</span>
+                    <span class="logo-bracket">]</span>
+                </div>
+                <div class="tagline-container">
+                    <div class="tagline" id="tagline"></div>
+                    <div class="cursor">_</div>
+                </div>
+            </div>
+
+            <!-- Hero section -->
+            <div class="hero">
+                <div class="badge-group">
+                    <span class="badge">✦ UNDETECTED</span>
+                    <span class="badge">✦ LEVEL 8 EXECUTOR</span>
+                    <span class="badge">✦ SCRIPT HUB</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="highlight">CRACK THE</span><br>
+                    <span class="neon-text">ROBLOX MATRIX</span>
+                </h1>
+                <p class="hero-description">
+                    Advanced script execution • Keyless • 99% UNC • Instant injection<br>
+                    The most powerful executor on the market.
+                </p>
+                <div class="button-group">
+                    <button class="btn btn-primary" id="downloadBtn">
+                        <span class="btn-icon">⬇️</span>
+                        DOWNLOAD NEXUS
+                        <span class="btn-blink"></span>
+                    </button>
+                    <button class="btn btn-secondary" id="featuresBtn">
+                        <span class="btn-icon">⚡</span>
+                        VIEW FEATURES
+                    </button>
+                </div>
+                
+                <!-- Download card popup (hidden initially) -->
+                <div class="download-card" id="downloadCard">
+                    <div class="card-header">
+                        <span class="card-icon">⚠️</span>
+                        <h3>SECURE DOWNLOAD</h3>
+                        <button class="close-card" id="closeCard">✕</button>
+                    </div>
+                    <div class="card-body">
+                        <p>Your download will start automatically...</p>
+                        <div class="loader"></div>
+                        <div class="download-links">
+                            <a href="#" class="direct-link" id="directLink">Direct Download (64MB)</a>
+                            <a href="#" class="mirror-link">Mirror Link #1</a>
+                            <a href="#" class="mirror-link">Mirror Link #2</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats section -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-value" id="usersCount">0</div>
+                    <div class="stat-label">ACTIVE USERS</div>
+                    <div class="stat-trend">↑ 234 today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">99.7%</div>
+                    <div class="stat-label">UNC SCORE</div>
+                    <div class="stat-trend">↑ Top 1%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0.01ms</div>
+                    <div class="stat-label">INJECTION TIME</div>
+                    <div class="stat-trend">Lightning fast</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">UPTIME</div>
+                    <div class="stat-trend">Auto-updates</div>
+                </div>
+            </div>
+
+            <!-- Features grid -->
+            <div class="features-section" id="features">
+                <h2 class="section-title">
+                    <span class="title-dec">◈</span>
+                    CORE FEATURES
+                    <span class="title-dec">◈</span>
+                </h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Script Hub</h3>
+                        <p>Built-in library with 1000+ scripts. Auto-updating database.</p>
+                        <div class="feature-tag">Premium</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Keyless System</h3>
+                        <p>No keys, no links, no BS. Download and execute instantly.</p>
+                        <div class="feature-tag">Free</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Fast Injection</h3>
+                        <p>0.01ms injection time. Supports all Roblox updates.</p>
+                        <div class="feature-tag">Optimized</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Byfron Bypass</h3>
+                        <p>Fully undetected. Advanced obfuscation techniques.</p>
+                        <div class="feature-tag">Secure</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📦</div>
+                        <h3>Script Storage</h3>
+                        <p>Save and organize your scripts. Cloud sync available.</p>
+                        <div class="feature-tag">Cloud</div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Universal Support</h3>
+                        <p>Works on every Roblox game. Auto-detects game type.</p>
+                        <div class="feature-tag">All Games</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commands section -->
+            <div class="commands-section">
+                <h2 class="section-title">
+                    <span class="title-dec">⌨️</span>
+                    COMMAND LIST
+                    <span class="title-dec">⌨️</span>
+                </h2>
+                <div class="commands-grid">
+                    <div class="command">
+                        <span class="cmd">loadstring(game:HttpGet("..."))()</span>
+                        <span class="cmd-desc">Execute external script</span>
+                    </div>
+                    <div class="command">
+                        <span class="cmd">save(scriptname)</span>
+                        <span class="cmd-desc">Save current script</span>
+                    </div>
+                    <div class="command">
+                        <span class="cmd">inject()</span>
+                        <span class="cmd-desc">Manual injection</span>
+                    </div>
+                    <div class="command">
+                        <span class="cmd">scripts()</span>
+                        <span class="cmd-desc">Open script hub</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download warning -->
+            <div class="warning-box">
+                <span class="warning-icon">⚠️</span>
+                <div class="warning-text">
+                    <strong>DISABLE ANTIVIRUS</strong> • Nexus uses advanced injection methods that may trigger false positives
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-links">
+                    <a href="#">Discord</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">Status</a>
+                </div>
+                <div class="footer-text">
+                    NEXUS EXECUTOR © 2025 • For educational purposes only
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
