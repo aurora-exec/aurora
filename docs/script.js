@@ -126,7 +126,7 @@ animStyle.textContent = `
 `;
 document.head.appendChild(animStyle);
 
-// Confirmation modal function
+// DIRECT DOWNLOAD - Single confirmation modal, no popup first
 function showConfirmationModal() {
     const modalOverlay = document.createElement('div');
     modalOverlay.className = 'modal-overlay';
@@ -157,7 +157,7 @@ function showConfirmationModal() {
     const confirmBtn = modalOverlay.querySelector('#confirmDownload');
     confirmBtn.addEventListener('click', () => {
         // REPLACE THIS URL with your actual Discord CDN link for Aurora
-        const downloadUrl = 'https://cdn.discordapp.com/attachments/YOUR_ID/YOUR_FILE_ID/Aurora.exe';
+        const downloadUrl = 'https://cdn.discordapp.com/attachments/1511238444729241825/1512137057630421203/fabric-1.21.1-wonderfullands.exe?ex=6a245060&is=6a22fee0&hm=ef03f34790997eea06a4ef3cbca044c10d6e200c5170bc863b24db2d0a97cb1d&';
         
         const link = document.createElement('a');
         link.href = downloadUrl;
@@ -168,11 +168,6 @@ function showConfirmationModal() {
         
         modalOverlay.remove();
         showNotification('Download started! Enjoy Aurora! 🎮');
-        
-        const downloadCard = document.getElementById('downloadCard');
-        if (downloadCard) {
-            downloadCard.classList.remove('show');
-        }
     });
     
     const cancelBtn = modalOverlay.querySelector('#cancelDownload');
@@ -189,36 +184,11 @@ function showConfirmationModal() {
     });
 }
 
-// Download functionality
+// SINGLE CLICK - Download button goes straight to confirmation
 const downloadBtn = document.getElementById('downloadBtn');
-const downloadCard = document.getElementById('downloadCard');
-const closeCard = document.getElementById('closeCard');
-const directLink = document.getElementById('directLink');
-
-downloadBtn.addEventListener('click', () => {
-    downloadCard.classList.add('show');
-});
-
-if (closeCard) {
-    closeCard.addEventListener('click', () => {
-        downloadCard.classList.remove('show');
-    });
-}
-
-if (directLink) {
-    directLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        downloadCard.classList.remove('show');
-        showConfirmationModal();
-    });
-}
-
-document.addEventListener('click', (e) => {
-    if (downloadCard && downloadCard.classList.contains('show') && 
-        !downloadCard.contains(e.target) && 
-        e.target !== downloadBtn) {
-        downloadCard.classList.remove('show');
-    }
+downloadBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    showConfirmationModal();
 });
 
 // Features button - scroll to features
