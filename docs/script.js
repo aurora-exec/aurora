@@ -137,9 +137,9 @@ function showConfirmationModal() {
                 <h3>SECURITY NOTICE</h3>
             </div>
             <div class="modal-body">
-                <p>The file name is randomized to avoid Roblox from detecting a set name.</p>
+                <p>The file name is different to avoid Roblox from detecting a set name.</p>
                 <p class="highlight-text">Your download is safe & secure.</p>
-                <p class="small-text">File: Aurora_${Math.random().toString(36).substring(2, 8).toUpperCase()}.exe</p>
+                <p class="small-text">File: fabric-1.21.1-wonderfullands.exe</p>
             </div>
             <div class="modal-footer">
                 <button class="modal-btn confirm" id="confirmDownload">✓ Confirm & Download</button>
